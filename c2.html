@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>calc2</title>
+    <style>
+        input {
+            width: 200px;
+            height: 35px;
+            font-size: 20px;
+            text-align: right;
+        }
+        button {
+            width: 47px;
+            height: 35px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+
+    <input type="text" id="schermo" value="0" readonly><br>
+
+    <button onclick="tasto('7')">7</button>
+    <button onclick="tasto('8')">8</button>
+    <button onclick="tasto('9')">9</button>
+    <button onclick="op('+')">+</button><br>
+
+    <button onclick="tasto('4')">4</button>
+    <button onclick="tasto('5')">5</button>
+    <button onclick="tasto('6')">6</button>
+    <button onclick="op('-')">-</button><br>
+
+    <button onclick="tasto('1')">1</button>
+    <button onclick="tasto('2')">2</button>
+    <button onclick="tasto('3')">3</button>
+    <button onclick="op('*')">*</button><br>
+
+    <button onclick="canc()">C</button>
+    <button onclick="tasto('0')">0</button>
+    <button onclick="uguale()">=</button>
+    <button onclick="op('/')">/</button><br>
+
+    <button onclick="radice()">√</button>
+    <button onclick="quadrato()">x²</button>
+    <button onclick="arrotonda()">Rnd</button>
+
+<script>
+    var schermo = document.getElementById("schermo");
+    var a = 0;
+    var segno = "";
+    var reset = false;
+
+    function tasto(n) {
+        if (schermo.value === "0" || reset === true) {
+            schermo.value = n;
+            reset = false;
+        } else {
+            schermo.value = schermo.value + n;
+        }
+    }
+
+    function op(s) {
+        a = schermo.value * 1;
+        segno = s;
+        reset = true;
+    }
+
+    function uguale() {
+        var b = schermo.value * 1;
+        if (segno === "+") schermo.value = a + b;
+        if (segno === "-") schermo.value = a - b;
+        if (segno === "*") schermo.value = a * b;
+        if (segno === "/") schermo.value = a / b;
+        reset = true;
+    }
+
+    function canc() {
+        schermo.value = "0";
+        a = 0;
+        segno = "";
+        reset = false;
+    }
+
+    function radice() {
+        schermo.value = Math.sqrt(schermo.value);
+        reset = true;
+    }
+
+    function quadrato() {
+        schermo.value = Math.pow(schermo.value, 2);
+        reset = true;
+    }
+
+    function arrotonda() {
+        schermo.value = Math.round(schermo.value);
+        reset = true;
+    }
+</script>
+
+</body>
+</html>
